@@ -7,12 +7,13 @@ const TaskSchema = new mongoose.Schema({
         minlength: 1,
         trimm: true
     },
+
     _listId: {
         type: mongoose.Types.ObjectId,
         required: true,
     }
 })
 
-const Task = mongoose.Model('Task', TaskSchema);
+const Task = mongoose.model('Task', TaskSchema);
 
-moduele.exports = { Tasks }
+module.exports = { Task }
