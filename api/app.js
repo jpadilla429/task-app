@@ -1,7 +1,11 @@
 const express = require('express');
 const app = express();
 
-/*ROUTE HANDLERS*/
+//load in the mongoose models
+const{ List } = require('./db/models/list.model');
+const{ Task } = require('./db/models/task.model');
+
+/*ROUTE HANDLERS*/  
 
 /*LIST ROUTES*/
 
