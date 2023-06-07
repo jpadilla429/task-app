@@ -1,8 +1,16 @@
 const express = require('express');
 const app = express();
 
+const{mongoose} = require('./db/mongoose');
+
+
+const bodyParser = require('body-parser');
+
 //load in the mongoose models
 const{ List, Task} = require('./db/models');
+
+//load middleware
+app.use(bodyParser.json());
 
 /*ROUTE HANDLERS*/  
 
@@ -14,6 +22,9 @@ const{ List, Task} = require('./db/models');
  */
 app.get('/lists', (req, res) => {
     //we want to return an array of the lists in the database
+    List.find({}).then((lists) => {
+        res.send(lists);
+    });
 })
 
 /**
@@ -23,6 +34,16 @@ app.get('/lists', (req, res) => {
 app.post('/lists', (req, res) => {
     //we want to create a new list and return the new list document back to the user(which includes id)
     //the list information (fields) will be passed in vai JSON request body
+    let title = req.body.title;
+
+    let newList = new List({
+        title
+    });
+
+    newList.save().then((listDoc) => {
+        //The full list is returned
+        res.send(listDoc);
+    });
 
 });
 
